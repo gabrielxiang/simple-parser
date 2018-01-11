@@ -9,7 +9,7 @@ import java.util.Map;
 public class Test {
 
     public static void main(String... args) {
-        Node ast = Parser.doParse("((lambda (x) (* x 2)) 10)");
+        Node ast = Parser.doParse("(let ([x 2]) (+ (let ([x 1]) x) x))");
         Map<String, Object> env = Visitor.env0();
         Object result = Visitor.interp(ast, env);
         System.out.println(JSON.toJSONString(result));
