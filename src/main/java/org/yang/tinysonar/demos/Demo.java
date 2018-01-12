@@ -16,10 +16,17 @@ public class Demo {
         System.out.println("R2 Version 0.0.1\n\n>");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String code = br.readLine();
-        Node ast = Parser.doParse(code);
-        Map<String, Object> env = Visitor.env0();
-        Object result = Visitor.interp(ast, env);
-        System.out.println(JSON.toJSONString(result));
+        while (!code.contains("quit")) {
+            try {
+                Node ast = Parser.doParse(code);
+                Map<String, Object> env = Visitor.env0();
+                Object result = Visitor.interp(ast, env);
+                System.out.println(JSON.toJSONString(result));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            code = br.readLine();
+        }
     }
 
 }
